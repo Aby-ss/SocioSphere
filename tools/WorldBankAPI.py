@@ -1,5 +1,8 @@
 import wbgapi as wb
 
+from rich.traceback import install
+install(show_locals=True)
+
 # Search for inflation-related series information
 data = wb.series.info(q="inflation")
 
