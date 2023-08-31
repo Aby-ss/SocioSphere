@@ -1,4 +1,5 @@
 # SocioSphere
+[![wakatime](https://wakatime.com/badge/user/04c60a11-7fcd-4d1d-accf-a4bb74ceedec/project/34ff9e82-4371-4589-9421-35438c8f30ae.svg)](https://wakatime.com/badge/user/04c60a11-7fcd-4d1d-accf-a4bb74ceedec/project/34ff9e82-4371-4589-9421-35438c8f30ae)
 # InfluenceGraph Insights
 
 **Uncover the intricate web of political influence and power dynamics with InfluenceGraph Insights, a CLI application designed to analyze and visualize relationships among political entities, corporations, and communities. InfluenceGraph Insights is a dynamic CLI application that delves into the intricate web of political influence, offering a comprehensive view of relationships among political entities, corporations, and communities. Designed to empower analysts, researchers, and curious minds, this tool harnesses data from diverse APIs, including campaign finance, lobbying information, and sentiment analysis. The application constructs dynamic network graphs that visually depict influence connections, highlighting the power dynamics that shape decision-making processes.**
