@@ -18,7 +18,7 @@ print(gdpGrowth_data)
 print(grossSaving_data)
 
 print(" ")
-print("-" * 50)
+print("-" * 150)
 print(" ")
 
 inflation_data = wb.data.DataFrame("FP.CPI.TOTL.ZG").transpose()
