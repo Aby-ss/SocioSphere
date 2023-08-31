@@ -6,6 +6,7 @@ from time import sleep
 import math
 import keyboard
 import numpy as np
+import wbgapi as wb
 import asciichartpy
 
 from rich import print
