@@ -72,7 +72,7 @@ class Footer:
         return Panel(grid, style="white on black", box=box.SQUARE)
 
 def news():
-    url = "https://api.apilayer.com/financelayer/news?apikey=EHw0Ndjb26EG0xvAK5uNSO5oNkgp5w73&tickers=blk&tickers=btc&tickers=VOO&tickers=STT&tags=News&tags=Business&sources=forbes.com&sources=investing.com&sources=bloomberg.com&sort=desc&offset=5&limit=7&keywords=news&keywords=stock%20prices&fallback=on&date=thismonth"
+    url = "https://api.apilayer.com/financelayer/news?apikey=EHw0Ndjb26EG0xvAK5uNSO5oNkgp5w73&tickers=blk&tickers=btc&tickers=VOO&tickers=STT&tags=News&tags=Business&sources=forbes.com&sources=investing.com&sources=bloomberg.com&sort=desc&offset=5&limit=7&keywords=news&keywords=economy&keywords=politics&keywords=stock%20prices&fallback=on&date=thismonth"
 
     response = requests.get(url)
     data = response.json()
