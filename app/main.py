@@ -42,9 +42,9 @@ layout["Body"].split_row(
 
 
 layout["Left"].split_column(
-    Layout(name="Sentiment Analysis"), #✅
+    Layout(name="Sentiment Analysis"), #📝
     Layout(name="Entity Profilling"), #✅
-    Layout(name="Power Dynamics")
+    Layout(name="Power Dynamics") #📝
 )
 
 layout["Right"].split_column(
