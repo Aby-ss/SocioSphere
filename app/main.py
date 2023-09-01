@@ -122,12 +122,30 @@ def wikipedia_main():
     return Panel(topic_summary, title="Entity profilling", border_style="bold white", box=box.SQUARE)
 
 def worldBank_API():
-    inflation_data = wb.data.DataFrame("FP.CPI.TOTL.ZG", "USA").transpose()
-    expenses_data = wb.data.DataFrame("NE.EXP.GNFS.CD", "USA").transpose()
-    gdp_data = wb.data.DataFrame("NY.GDP.MKTP.CD", "USA").transpose()
-    gdpGrowth_data = wb.data.DataFrame("NY.GDP.MKTP.KD.ZG", "USA").transpose()
-    grossSaving_data = wb.data.DataFrame("NY.GNS.ICTR.CD", "USA").transpose()
-    exports_data = wb.data.DataFrame("NE.EXP.GNFS.CD", "USA").transpose()    
+    # Define the indicators and country code
+    indicators = [
+        "FP.CPI.TOTL.ZG",  # Inflation Rate
+        "NE.EXP.GNFS.CD",  # Expenses
+        "NY.GDP.MKTP.CD",  # GDP
+        "NY.GDP.MKTP.KD.ZG",  # GDP Growth Rate
+        "NY.GNS.ICTR.CD",  # Gross Savings
+        "NE.EXP.GNFS.CD"  # Exports
+    ]
+    country_code = "USA"
+
+    # Initialize an empty list to store DataFrames
+    data_frames = []
+
+    # Fetch data for each indicator and store it in a DataFrame
+    for indicator in indicators:
+        data = wb.data.DataFrame(indicator, country_code).transpose()
+        data_frames.append(data)
+
+    # Concatenate the DataFrames horizontally using the year as the index
+    combined_data = pd.concat(data_frames, axis=1)
+
+    # Print the combined data as a table
+    return combined_data   
 
 
 layout["Header"].update(Header())
