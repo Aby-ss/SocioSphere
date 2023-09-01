@@ -37,6 +37,12 @@ def get_wikipedia_summary(topic):
     summary = data.get("extract", "No summary available.")
     return summary
 
+# Analyze sentiment for a given text
+def analyze_text_sentiment(text):
+    sentiment = analyze_sentiment(text)
+    sentiment_score = sentiment["compound"]
+    return sentiment_score
+
 # Get news data
 news_data = get_news_data()
 
@@ -52,8 +58,7 @@ for news in news_data:
     published_at = news["published_at"]
 
     # Analyze sentiment of the description
-    sentiment = analyze_sentiment(description)
-    sentiment_score = sentiment["compound"]
+    sentiment_score = analyze_text_sentiment(description)
 
     # Get sentiment label with color formatting
     sentiment_label = get_sentiment_label(sentiment_score)
@@ -71,11 +76,22 @@ for news in news_data:
 news_panel = Panel(news_panel_content, title="Aggregated News", border_style="bold white", box=box.SQUARE)
 
 # Get the Wikipedia summary for a political figure (Barack Obama in this case)
-political_figure = "Barack_Obama"
+political_figure = "Hitler"
 topic_summary = get_wikipedia_summary(political_figure)
 
-# Create a panel to display the Wikipedia topic summary
-wikipedia_panel = Panel(topic_summary, title="Entity Profiling", border_style="bold white", box=box.SQUARE)
+# Analyze sentiment of the Wikipedia summary
+wikipedia_sentiment_score = analyze_text_sentiment(topic_summary)
+
+# Get sentiment label with color formatting for Wikipedia summary
+wikipedia_sentiment_label = get_sentiment_label(wikipedia_sentiment_score)
+
+# Create a panel to display the Wikipedia topic summary with sentiment
+wikipedia_panel_content = (
+    f"Title: Wikipedia Summary for {political_figure}\n"
+    f"Summary: {topic_summary}\n"
+    f"Sentiment: {wikipedia_sentiment_label} (Score: {wikipedia_sentiment_score})\n\n"
+)
+wikipedia_panel = Panel(wikipedia_panel_content, title="Entity Profiling", border_style="bold white", box=box.SQUARE)
 
 # Print the news panel and Wikipedia panel
 print(news_panel)
