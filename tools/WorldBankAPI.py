@@ -1,7 +1,7 @@
 import wbgapi as wb
+import pandas as pd
 
-from rich import print
-from rich.panel import Panel
+
 from rich.traceback import install
 install(show_locals=True)
 
@@ -24,8 +24,8 @@ for indicator in indicators:
     data = wb.data.DataFrame(indicator, country_code).transpose()
     data_dict[indicator] = data
 
-# Print each data table
-for indicator, data in data_dict.items():
-    print(f"{indicator}")
-    print(Panel.fit(data))
-    print("\n")
+# Create a Pandas DataFrame from the collected data
+df = pd.DataFrame(data_dict)
+
+# Print the Pandas DataFrame as a table
+print(df)
