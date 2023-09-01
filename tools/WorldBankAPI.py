@@ -1,18 +1,31 @@
 import wbgapi as wb
 
+from rich import print
+from rich.panel import Panel
 from rich.traceback import install
 install(show_locals=True)
 
-inflation_data = wb.data.DataFrame("FP.CPI.TOTL.ZG", "USA").transpose()
-expenses_data = wb.data.DataFrame("NE.EXP.GNFS.CD", "USA").transpose()
-gdp_data = wb.data.DataFrame("NY.GDP.MKTP.CD", "USA").transpose()
-gdpGrowth_data = wb.data.DataFrame("NY.GDP.MKTP.KD.ZG", "USA").transpose()
-grossSaving_data = wb.data.DataFrame("NY.GNS.ICTR.CD", "USA").transpose()
-exports_data = wb.data.DataFrame("NE.EXP.GNFS.CD", "USA").transpose()
+# Define the indicators and country code
+indicators = [
+    "FP.CPI.TOTL.ZG",  # Inflation Rate
+    "NE.EXP.GNFS.CD",  # Expenses
+    "NY.GDP.MKTP.CD",  # GDP
+    "NY.GDP.MKTP.KD.ZG",  # GDP Growth Rate
+    "NY.GNS.ICTR.CD",  # Gross Savings
+    "NE.EXP.GNFS.CD"  # Exports
+]
+country_code = "USA"
 
-print(inflation_data)
-print(expenses_data)
-print(exports_data)
-print(gdp_data)
-print(gdpGrowth_data)
-print(grossSaving_data)
+# Initialize an empty dictionary to store data
+data_dict = {}
+
+# Fetch data for each indicator and store it in the dictionary
+for indicator in indicators:
+    data = wb.data.DataFrame(indicator, country_code).transpose()
+    data_dict[indicator] = data
+
+# Print each data table
+for indicator, data in data_dict.items():
+    print(f"{indicator}")
+    print(Panel.fit(data))
+    print("\n")
