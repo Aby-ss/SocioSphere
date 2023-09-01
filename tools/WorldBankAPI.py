@@ -16,16 +16,18 @@ indicators = [
 ]
 country_code = "USA"
 
-# Initialize an empty dictionary to store data
-data_dict = {}
+# Initialize empty lists to store data
+data_lists = {indicator: [] for indicator in indicators}
+years = []
 
-# Fetch data for each indicator and store it in the dictionary
+# Fetch data for each indicator and store it in the lists
 for indicator in indicators:
     data = wb.data.DataFrame(indicator, country_code).transpose()
-    data_dict[indicator] = data
+    years = data.columns.tolist()
+    data_lists[indicator] = data.values[0]
 
 # Create a Pandas DataFrame from the collected data
-df = pd.DataFrame(data_dict)
+df = pd.DataFrame(data_lists, index=years)
 
 # Print the Pandas DataFrame as a table
 print(df)
