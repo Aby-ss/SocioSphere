@@ -16,18 +16,16 @@ indicators = [
 ]
 country_code = "USA"
 
-# Initialize empty lists to store data
-data_lists = {indicator: [] for indicator in indicators}
-years = []
+# Initialize an empty list to store DataFrames
+data_frames = []
 
-# Fetch data for each indicator and store it in the lists
+# Fetch data for each indicator and store it in a DataFrame
 for indicator in indicators:
     data = wb.data.DataFrame(indicator, country_code).transpose()
-    years = data.columns.tolist()
-    data_lists[indicator] = data.values[0]
+    data_frames.append(data)
 
-# Create a Pandas DataFrame from the collected data
-df = pd.DataFrame(data_lists, index=years)
+# Concatenate the DataFrames horizontally using the year as the index
+combined_data = pd.concat(data_frames, axis=1)
 
-# Print the Pandas DataFrame as a table
-print(df)
+# Print the combined data as a table
+print(combined_data)
