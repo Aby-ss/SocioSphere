@@ -75,30 +75,43 @@ class Footer:
 
 
 def worldBank_API():
-    # Define the indicators and country code
+    # Data Retrieval
     indicators = [
-        "FP.CPI.TOTL.ZG",  # Inflation Rate
-        "NE.EXP.GNFS.CD",  # Expenses
-        "NY.GDP.MKTP.CD",  # GDP
-        "NY.GDP.MKTP.KD.ZG",  # GDP Growth Rate
-        "NY.GNS.ICTR.CD",  # Gross Savings
-        "NE.EXP.GNFS.CD"  # Exports
+        "FP.CPI.TOTL.ZG",     # Inflation
+        "NE.EXP.GNFS.CD",     # Expenses
+        "NY.GDP.MKTP.CD",     # GDP
+        "NY.GDP.MKTP.KD.ZG",  # GDP Growth
+        "NY.GNS.ICTR.CD",     # Gross Savings
+        "NE.EXP.GNFS.CD"      # Exports
     ]
-    country_code = "USA"
 
-    # Initialize an empty list to store DataFrames
-    data_frames = []
+    countries = "USA"
 
-    # Fetch data for each indicator and store it in a DataFrame
-    for indicator in indicators:
-        data = wb.data.DataFrame(indicator, country_code).transpose()
-        data_frames.append(data)
+    data = [wb.data.DataFrame(indicator, countries).transpose() for indicator in indicators]
 
-    # Concatenate the DataFrames horizontally using the year as the index
-    combined_data = pd.concat(data_frames, axis=1)
+    # Set up colors
+    colors = ['b', 'g', 'r', 'c', 'm', 'y']
 
-    # Print the combined data as a table
-    return combined_data   
+    # Create a figure and axis
+    fig, ax = plt.subplots()
+
+    # Plot each indicator with a different color
+    for i, indicator_data in enumerate(data):
+        ax.plot(indicator_data.index, indicator_data.values, label=indicators[i], color=colors[i])
+
+    # Set axis labels and title
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Value")
+    ax.set_title("Multiple Indicators Over Time")
+
+    # Add a legend
+    ax.legend(loc='upper left')
+
+    # Rotate the x-axis labels by 90 degrees
+    ax.tick_params(axis='x', rotation=90)
+
+    # Show the plot
+    plt.show()   
 
 # Function to get news data
 def get_news_data():
