@@ -27,38 +27,27 @@ for indicator in indicators:
     except KeyError:
         print(f"Data not available for indicator: {indicator}")
 
-# Check if any data was fetched
-if not data_frames:
-    print("No data available for the specified indicators.")
-else:
-    # Concatenate the DataFrames horizontally using the year as the index
-    combined_data = pd.concat(data_frames, axis=1)
+# Concatenate the DataFrames horizontally using the year as the index
+combined_data = pd.concat(data_frames, axis=1)
 
-    # Print the combined data as a table
-    print(combined_data)
+# Print the combined data as a table
+print(combined_data)
 
-    # Create a function to plot and display data using Matplotlib
-    def plot_data(indicator_data, indicator_name):
-        plt.figure(figsize=(10, 6))
-        plt.plot(indicator_data.index, indicator_data.values, marker='o', linestyle='-')
-        plt.title(f"{indicator_name} Over Time")
-        plt.xlabel("Year")
-        plt.ylabel(indicator_name)
-        plt.grid(True)
-        plt.show()
+# Turn on interactive mode for Matplotlib
+plt.ion()
 
-    # List of indicators
-    indicators = [
-        "FP.CPI.TOTL.ZG",
-        "NE.EXP.GNFS.CD",
-        "NY.GDP.MKTP.CD",
-        "NY.GDP.MKTP.KD.ZG",
-        "NY.GNS.ICTR.CD",
-        "NE.EXP.GNFS.CD"
-    ]
+# Create a function to plot and display data using Matplotlib
+def plot_data(indicator_data, indicator_name):
+    plt.figure(figsize=(10, 6))
+    plt.plot(indicator_data.index, indicator_data.values, marker='o', linestyle='-')
+    plt.title(f"{indicator_name} Over Time")
+    plt.xlabel("Year")
+    plt.ylabel(indicator_name)
+    plt.grid(True)
+    plt.show()
 
-    # Create and display line plots for each indicator using Matplotlib
-    for indicator in indicators:
-        if indicator in combined_data.columns:
-            indicator_data = combined_data[indicator]
-            plot_data(indicator_data, indicator)
+# Create and display line plots for each indicator using Matplotlib
+for indicator in indicators:
+    if indicator in combined_data.columns:
+        indicator_data = combined_data[indicator]
+        plot_data(indicator_data, indicator)
