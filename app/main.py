@@ -7,6 +7,7 @@ import math
 import keyboard
 import numpy as np
 import wbgapi as wb
+import matplotlib.pyplot as plt
 import asciichartpy
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
@@ -209,5 +210,7 @@ layout["Header"].update(Header())
 layout["Footer"].update(Footer())
 layout["News"].update(news_main())
 layout["Entity Profilling"].update(wiki_main())
+layout["Political / Economical Influences"].update(Panel("Charts shown separately.", border_style="bold white", box=box.SQUARE))
+worldBank_API()
 
 print(layout)
