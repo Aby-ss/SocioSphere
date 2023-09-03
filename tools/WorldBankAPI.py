@@ -1,5 +1,6 @@
 import wbgapi as wb
 import pandas as pd
+import asciichartpy
 
 
 from rich.traceback import install
