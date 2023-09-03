@@ -36,5 +36,8 @@ ax.set_title("Multiple Indicators Over Time")
 # Add a legend
 ax.legend(loc='upper left')
 
+# Rotate the x-axis labels by 90 degrees
+ax.tick_params(axis='x', rotation=90)
+
 # Show the plot
 plt.show()
