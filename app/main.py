@@ -43,7 +43,7 @@ layout["Body"].split_row(
 
 
 layout["Left"].split_column(
-    Layout(name="Sentiment Analysis"), #📝
+    Layout(name="Stock Market Data"), #📝
     Layout(name="Entity Profilling"), #✅
     Layout(name="Power Dynamics") #📝
 )
