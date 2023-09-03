@@ -30,3 +30,10 @@ combined_data = pd.concat(data_frames, axis=1)
 
 # Print the combined data as a table
 print(combined_data)
+
+# Create ASCII charts for each indicator and print them
+for indicator in indicators:
+    indicator_data = combined_data[indicator]
+    print(f"\n{indicator}:")
+    chart_data = asciichartpy.plot(indicator_data.tolist(), {'height': 10})
+    print(chart_data)
