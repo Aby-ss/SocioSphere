@@ -2,6 +2,9 @@ import json
 import requests
 import asciichartpy
 
+from rich.traceback import install
+install(show_locals=True)
+
 base_url = 'https://www.alphavantage.co/query'
 function = 'TIME_SERIES_DAILY'
 output_size = 'compact'
