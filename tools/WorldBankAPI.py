@@ -1,17 +1,40 @@
 import wbgapi as wb
+import matplotlib.pyplot as plt
+
 from rich.traceback import install
 install(show_locals=True)
 
-inflation_data = wb.data.DataFrame("FP.CPI.TOTL.ZG", "USA").transpose()
-expenses_data = wb.data.DataFrame("NE.EXP.GNFS.CD", "USA").transpose()
-gdp_data = wb.data.DataFrame("NY.GDP.MKTP.CD", "USA").transpose()
-gdpGrowth_data = wb.data.DataFrame("NY.GDP.MKTP.KD.ZG", "USA").transpose()
-grossSaving_data = wb.data.DataFrame("NY.GNS.ICTR.CD", "USA").transpose()
-exports_data = wb.data.DataFrame("NE.EXP.GNFS.CD", "USA").transpose()
+# Data Retrieval
+indicators = [
+    "FP.CPI.TOTL.ZG",     # Inflation
+    "NE.EXP.GNFS.CD",     # Expenses
+    "NY.GDP.MKTP.CD",     # GDP
+    "NY.GDP.MKTP.KD.ZG",  # GDP Growth
+    "NY.GNS.ICTR.CD",     # Gross Savings
+    "NE.EXP.GNFS.CD"      # Exports
+]
 
-print(inflation_data)
-print(expenses_data)
-print(exports_data)
-print(gdp_data)
-print(gdpGrowth_data)
-print(grossSaving_data)
+countries = "USA"
+
+data = [wb.data.DataFrame(indicator, countries).transpose() for indicator in indicators]
+
+# Set up colors
+colors = ['b', 'g', 'r', 'c', 'm', 'y']
+
+# Create a figure and axis
+fig, ax = plt.subplots()
+
+# Plot each indicator with a different color
+for i, indicator_data in enumerate(data):
+    ax.plot(indicator_data.index, indicator_data.values, label=indicators[i], color=colors[i])
+
+# Set axis labels and title
+ax.set_xlabel("Year")
+ax.set_ylabel("Value")
+ax.set_title("Multiple Indicators Over Time")
+
+# Add a legend
+ax.legend(loc='upper left')
+
+# Show the plot
+plt.show()
