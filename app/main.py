@@ -210,7 +210,7 @@ layout["Header"].update(Header())
 layout["Footer"].update(Footer())
 layout["News"].update(news_main())
 layout["Entity Profilling"].update(wiki_main())
-layout["Political / Economical Influences"].update(Panel("Charts shown separately.", border_style="bold white", box=box.SQUARE))
+layout["Political / Economical Influences"].update(Panel("Charts shown separately.", padding=(8,25), border_style="bold white", box=box.SQUARE))
 worldBank_API()
 
 print(layout)
