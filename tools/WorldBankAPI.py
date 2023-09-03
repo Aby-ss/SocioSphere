@@ -6,34 +6,39 @@ import asciichartpy
 from rich.traceback import install
 install(show_locals=True)
 
-# Define the indicators and country code
-indicators = [
-    "FP.CPI.TOTL.ZG",  # Inflation Rate
-    "NE.EXP.GNFS.CD",  # Expenses
-    "NY.GDP.MKTP.CD",  # GDP
-    "NY.GDP.MKTP.KD.ZG",  # GDP Growth Rate
-    "NY.GNS.ICTR.CD",  # Gross Savings
-    "NE.EXP.GNFS.CD"  # Exports
-]
-country_code = "USA"
+# Create a Pandas DataFrame with economic data
+data = {
+    "Year": [2010, 2011, 2012, 2013, 2014],  # Replace with your years
+    "Inflation Rate": [1.5, 2.0, 1.8, 2.2, 1.9],  # Replace with your inflation rate data
+    "Expenses": [200000, 220000, 240000, 260000, 280000],  # Replace with your expenses data
+    "GDP": [1500000, 1550000, 1600000, 1650000, 1700000],  # Replace with your GDP data
+    "GDP Growth Rate": [3.0, 3.2, 3.5, 3.8, 4.0],  # Replace with your GDP growth rate data
+    "Gross Savings": [30000, 32000, 35000, 38000, 40000],  # Replace with your gross savings data
+    "Exports": [180000, 190000, 200000, 210000, 220000]  # Replace with your exports data
+}
 
-# Initialize an empty list to store DataFrames
-data_frames = []
+# Create a Pandas DataFrame
+combined_data = pd.DataFrame(data)
+combined_data.set_index("Year", inplace=True)
 
-# Fetch data for each indicator and store it in a DataFrame
-for indicator in indicators:
-    data = wb.data.DataFrame(indicator, country_code).transpose()
-    data_frames.append(data)
-
-# Concatenate the DataFrames horizontally using the year as the index
-combined_data = pd.concat(data_frames, axis=1)
-
-# Print the combined data as a table
-print(combined_data)
-
-# Create ASCII charts for each indicator and print them
-for indicator in indicators:
-    indicator_data = combined_data[indicator]
-    print(f"\n{indicator}:")
+# Define a function to display ASCII charts
+def display_chart(indicator_data, indicator_name):
+    print(f"\n{indicator_name}:")
     chart_data = asciichartpy.plot(indicator_data.tolist(), {'height': 10})
     print(chart_data)
+
+# List of indicators
+indicators = [
+    "Inflation Rate",
+    "Expenses",
+    "GDP",
+    "GDP Growth Rate",
+    "Gross Savings",
+    "Exports"
+]
+
+# Create and display ASCII charts for each indicator
+for indicator in indicators:
+    if indicator in combined_data.columns:
+        indicator_data = combined_data[indicator]
+        display_chart(indicator_data, indicator)
