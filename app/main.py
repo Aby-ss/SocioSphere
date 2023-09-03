@@ -242,5 +242,6 @@ layout["News"].update(news_main())
 layout["Entity Profilling"].update(wiki_main())
 layout["Political / Economical Influences"].update(Panel("Charts shown separately.", padding=(8,25), border_style="bold white", box=box.SQUARE))
 worldBank_API()
+layout["Stock Market Data"].update(stockPrices())
 
 print(layout)
